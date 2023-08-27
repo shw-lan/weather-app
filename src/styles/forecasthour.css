@@ -1,0 +1,21 @@
+.forecast-hour-container {
+    color: var(--color4);
+}
+
+.forecast-card-container {
+    margin-top: 0.6rem;
+}
+
+.forecast-card {
+    padding: 0.7rem;
+}
+
+.weather-condition-icon {
+    transform: scale(0.8);
+}
+
+.weather-text {
+    overflow: hidden;
+    font-size: 0.8rem;
+    white-space: nowrap;
+}

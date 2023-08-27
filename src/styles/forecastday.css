@@ -1,0 +1,15 @@
+.forecast-day-container {
+    color: var(--color4);
+}
+
+.forecast-day-card-container {
+    margin-top: 0.6rem;
+}
+
+.forecast-day-card {
+    padding: 0.5rem;
+}
+
+.date {
+    font-size: smaller;
+}
