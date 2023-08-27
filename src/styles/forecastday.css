@@ -7,9 +7,47 @@
 }
 
 .forecast-day-card {
-    padding: 0.5rem;
+    display: flex;
+    width: 100%;
+    padding: 0.6rem;
 }
 
 .date {
     font-size: smaller;
+}
+
+.item1 {
+    grid-area: text;
+}
+.item2 {
+    grid-area: time;
+}
+.item3 {
+    grid-area: icon;
+}
+
+.today-container {
+    display: grid;
+    align-content: center;
+}
+
+.today-sun {
+    display: grid;
+    grid-template-areas:
+        "text text icon"
+        "time time icon";
+    align-items: center;
+    column-gap: 0.6rem;
+    font-size: 0.95rem;
+}
+.today-sun > p {
+    text-align: left;
+}
+
+.today-sun:first-child {
+    margin-bottom: 1rem;
+}
+
+.sun-icon {
+    width: 1.8rem;
 }

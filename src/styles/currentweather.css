@@ -20,6 +20,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
+    justify-items: stretch;
     padding: 1rem;
 }
 
@@ -38,4 +39,10 @@
 
 .icon {
     font-size: 1.3rem;
+}
+
+@media only screen and (min-width: 630px) {
+    .current-weather-info {
+        grid-template-columns: repeat(6, 1fr);
+    }
 }

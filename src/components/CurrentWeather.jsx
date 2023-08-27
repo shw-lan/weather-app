@@ -18,12 +18,14 @@ CurrentWeather.propTypes = {
 function CurrentWeather({ weatherdata }) {
     const { current, location } = weatherdata;
     const currentDate = current.last_updated;
+
     // getting date, year and month separately
     const curDate = {
         date: currentDate.split(" ")[0].split("-")[2],
         month: currentDate.split(" ")[0].split("-")[1],
         year: currentDate.split(" ")[0].split("-")[0],
     };
+
     // calculate aqi
     const co = current.air_quality.co;
     const gb_defra_index = 1;
@@ -36,6 +38,7 @@ function CurrentWeather({ weatherdata }) {
     const aqi =
         (co + no2 + o3 + pm2_5 + pm10 + so2 + gb_defra_index + us_epa_index) /
         8;
+
     return (
         <div className="cwRow1">
             <div className="currentWeather">

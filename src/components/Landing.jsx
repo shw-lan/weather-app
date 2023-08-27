@@ -9,7 +9,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 function Landing() {
     const [weatherData, setWeatherData] = useState(null);
     const [city, setCity] = useState("Shillong");
-    const [suggest, setSuggest] = useState("");
+    const [slides, setSlides] = useState(3);
+
+    let [suggest, setSuggest] = useState([]);
+
+    useEffect(() => {
+        if (window.innerWidth > 630) {
+            setSlides(4);
+        } else {
+            setSlides(3);
+        }
+    }, []);
 
     const autoComplete = async (e) => {
         await fetch(
@@ -20,12 +30,6 @@ function Landing() {
             .then((res) => res.json())
             .then((data) => setSuggest(data));
     };
-    useEffect(() => {
-        if (suggest.length > 0) {
-            console.log(suggest);
-            document.getElementById("suggest").classList.remove("hide");
-        }
-    });
 
     const handleChange = (e) => {
         setCity(e.target[0].value);
@@ -71,13 +75,15 @@ function Landing() {
         return <div>Loading...</div>;
     }
 
+    // console.log(weatherData);
     return (
         <section className="container" id="container">
-            <div>
+            <div className="searchbox-parent">
                 <form onSubmit={handleSubmit}>
                     <div className="search-container">
                         <input
                             type="text"
+                            spellCheck="false"
                             placeholder="Search for location"
                             id="searchBox"
                             onSubmit={handleSubmit}
@@ -88,26 +94,24 @@ function Landing() {
                         </button>
                     </div>
                 </form>
-                <div className="suggest" id="suggest">
-                    <table>
-                        {suggest.length > 0 ? (
-                            suggest.map((location, index) => {
-                                <tr key={index}>
-                                    <td>
-                                        {location.name}, {location.region},
-                                        {location.country}
-                                    </td>
-                                </tr>;
-                            })
-                        ) : (
-                            <div>NO data</div>
-                        )}
-                    </table>
-                </div>
+                <ul className="suggest">
+                    {suggest.length > 0 &&
+                        suggest.map((loc) => (
+                            <li
+                                key={loc.id}
+                                onClick={(e) => {
+                                    document.getElementById("searchBox").value =
+                                        e.target.innerText;
+                                }}
+                            >
+                                {loc.name}, {loc.region}, {loc.country}
+                            </li>
+                        ))}
+                </ul>
             </div>
             <CurrentWeather weatherdata={weatherData} />
-            <ForecastHour weatherdata={weatherData} />
-            <ForecastDay weatherdata={weatherData} />
+            <ForecastHour weatherdata={weatherData} slides={slides} />
+            <ForecastDay weatherdata={weatherData} slides={slides} />
         </section>
     );
 }
