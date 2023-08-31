@@ -2,8 +2,7 @@ import "../styles/forecastday.css";
 import Card from "./Card";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import sunrise from "../assets/sunrise.png";
-import sunset from "../assets/sunset.png";
+
 
 // if date == today return "Today", if tomorrow return "Tomorrow"
 const isTodayOrTomorrow = (date) => {
@@ -16,7 +15,7 @@ const isTodayOrTomorrow = (date) => {
     });
 };
 
-function Forecast_day({ weatherdata, slides }) {
+function Forecast_day({ weatherdata }) {
     const { forecastday } = weatherdata.forecast;
     return (
         <div className="forecast-day-container">
@@ -35,17 +34,18 @@ function Forecast_day({ weatherdata, slides }) {
                     return (
                         <SwiperSlide
                             key={index}
-                            style={{ flex: index == 0 ? "2" : "1" }}
+                            // style={{ flex: index == 0 ? "2" : "1" }}
+                            className="swiper-slide-day"
                         >
                             <Card>
                                 <div
                                     className="forecast-day-card"
-                                    style={{
-                                        justifyContent:
-                                            index == 0
-                                                ? "space-around"
-                                                : "center",
-                                    }}
+                                    // style={{
+                                    //     justifyContent:
+                                    //         index == 0
+                                    //             ? "space-around"
+                                    //             : "center",
+                                    // }}
                                 >
                                     <div>
                                         <h4>{todayOrTomorrow}</h4>
@@ -62,33 +62,7 @@ function Forecast_day({ weatherdata, slides }) {
                                                 0
                                             )}°`}</p>
                                         </strong>
-                                    </div>
-                                    {index == 0 && (
-                                        <div className="today-container">
-                                            <div className="today-sun">
-                                                <p className="item1">Sunrise</p>
-                                                <b className="item2">
-                                                    {forecastday[0].astro.sunrise}
-                                                </b>
-                                                <img
-                                                    src={sunrise}
-                                                    alt="sunrise"
-                                                    className="sun-icon item3"
-                                                />
-                                            </div>
-                                            <div className="today-sun">
-                                                <p className="item1">Sunset</p>
-                                                <b className="item2">
-                                                    {forecastday[0].astro.sunrise}
-                                                </b>
-                                                <img
-                                                    src={sunset}
-                                                    alt="sunset"
-                                                    className="sun-icon item3"
-                                                />
-                                                </div>
-                                            </div>
-                                    )}
+                                    </div>  
                                 </div>
                             </Card>
                         </SwiperSlide>

@@ -48,6 +48,16 @@
     z-index: 10;
 }
 
-.suggest > li:hover {
+.suggest > li:hover,
+.suggest > li:focus {
     background: #9895cf;
+}
+
+.bg-img {
+    position: absolute;
+    opacity: 0.2;
+    width: 100%;
+    object-fit: contain;
+    object-position: center;
+    top: 15%;
 }

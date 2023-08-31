@@ -17,14 +17,14 @@ CurrentWeather.propTypes = {
 };
 function CurrentWeather({ weatherdata }) {
     const { current, location } = weatherdata;
-    const currentDate = current.last_updated;
+    // const currentDate = current.last_updated;
 
     // getting date, year and month separately
-    const curDate = {
-        date: currentDate.split(" ")[0].split("-")[2],
-        month: currentDate.split(" ")[0].split("-")[1],
-        year: currentDate.split(" ")[0].split("-")[0],
-    };
+    // const curDate = {
+    //     date: currentDate.split(" ")[0].split("-")[2],
+    //     month: currentDate.split(" ")[0].split("-")[1],
+    //     year: currentDate.split(" ")[0].split("-")[0],
+    // };
 
     // calculate aqi
     const co = current.air_quality.co;

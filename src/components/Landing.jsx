@@ -5,6 +5,7 @@ import ForecastHour from "./ForecastHour";
 import ForecastDay from "./ForecastDay";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import RiseSet from "./RiseSet";
 
 function Landing() {
     const [weatherData, setWeatherData] = useState(null);
@@ -22,6 +23,7 @@ function Landing() {
     }, []);
 
     const autoComplete = async (e) => {
+        document.getElementById("suggestBox").classList.remove("hide");
         await fetch(
             `${import.meta.env.VITE_URL}search.json?key=${
                 import.meta.env.VITE_APIKEY
@@ -29,6 +31,12 @@ function Landing() {
         )
             .then((res) => res.json())
             .then((data) => setSuggest(data));
+    };
+
+    const handleAutoComplete = (e) => {
+        setCity(e.target.innerText);
+        document.getElementById("searchBox").value = "";
+        document.getElementById("suggestBox").classList.add("hide");
     };
 
     const handleChange = (e) => {
@@ -86,23 +94,25 @@ function Landing() {
                             spellCheck="false"
                             placeholder="Search for location"
                             id="searchBox"
+                            autoComplete="off"
                             onSubmit={handleSubmit}
                             onChange={autoComplete}
                         />
-                        <button type="submit" className="icon-search-btn">
+                        <button
+                            type="submit"
+                            className="icon-search-btn"
+                            id="submitBtn"
+                        >
                             <FontAwesomeIcon icon={faMagnifyingGlass} />
                         </button>
                     </div>
                 </form>
-                <ul className="suggest">
+                <ul className="suggest" id="suggestBox">
                     {suggest.length > 0 &&
                         suggest.map((loc) => (
                             <li
                                 key={loc.id}
-                                onClick={(e) => {
-                                    document.getElementById("searchBox").value =
-                                        e.target.innerText;
-                                }}
+                                onClick={(e) => handleAutoComplete(e)}
                             >
                                 {loc.name}, {loc.region}, {loc.country}
                             </li>
@@ -111,7 +121,8 @@ function Landing() {
             </div>
             <CurrentWeather weatherdata={weatherData} />
             <ForecastHour weatherdata={weatherData} slides={slides} />
-            <ForecastDay weatherdata={weatherData} slides={slides} />
+            <ForecastDay weatherdata={weatherData} />
+            <RiseSet weatherdata={weatherData} />
         </section>
     );
 }
